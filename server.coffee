@@ -29,6 +29,19 @@ router.get '/data', (req, res) ->
           'style':
             'font-size': '150%'
             'font-weight': '400'
+        'Paragraph':
+          'group': 'Paragraph'
+          'style':
+            'font-size': '100%'
+    'ColorPalette':
+      'VI_Black':
+        'group': 'main'
+        'hex': '#999999'
+        'rgb':
+          'r': '99'
+          'g': '99'
+          'b': '99'
+
   res.json data
   return
 
