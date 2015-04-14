@@ -10,13 +10,25 @@ router.get '/hello', (req, res) ->
   return
 
 router.get '/data', (req, res) ->
-  random = Mock.Random
   data =
-    boolean: random.boolean()
-    integer: random.integer(1, 9527)
-    float: random.float(1, 200, 0, 99)
-    string: random.string(7, 10)
-    range: random.range(1, 78, 5)
+    'Grid':
+      'max-width': '1100px'
+      'min-width': '880px'
+    'Typography':
+      'base':
+        'font-size': '16px'
+        'font-family': 'Arial'
+      'output':
+        'Heading 1':
+          'group': 'Heading'
+          'style':
+            "font-size": "180%"
+            "font-weight": "800"
+        'Heading 2':
+          'group': 'Heading'
+          'style':
+            'font-size': '150%'
+            'font-weight': '400'
   res.json data
   return
 
