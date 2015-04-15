@@ -17,7 +17,7 @@ router.get '/data', (req, res) ->
     'Typography':
       'base':
         'font-size': '16px'
-        'font-family': 'Arial'
+        'font-family': '"Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif'
       'output':
         'Heading 1':
           'group': 'Heading'

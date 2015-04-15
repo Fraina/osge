@@ -32,11 +32,13 @@ require([
 
   // chapter dom
   var $chapter = {},
+      $wrapper = $('#wrapper'),
+      $body = $('body'),
       $output = $(document.createDocumentFragment());
 
   function formatStyle(obj) {
     var ret = '';
-    _.each(obj.style, function(value, key) {
+    _.each(obj, function(value, key) {
       ret = ret + (key + ':' + value + ';')
     })
     return ret;
@@ -49,7 +51,10 @@ require([
       }
 
       var frag = $('<div>');
-      frag.attr('class', obj.group).prepend('<h2>' + obj.group + '</h2>');
+      frag
+        .attr('class', obj.group)
+        .addClass('chapter-content')
+        .prepend('<h2>' + obj.group + '</h2><div class="chapter-subContent"></div>');
       $chapter[key][obj.group] = frag;
       $output.find('#' + key).append(frag);
     }
@@ -59,31 +64,38 @@ require([
 
     _.mapObject(res, function(value, key) {
       var frag = $('<div>');
-      frag.attr('id', key).prepend('<h1>' + key + '</h1>');
+      frag.attr('id', key).addClass('chapter').prepend('<h1>' + key + '</h1>');
       $output.append(frag)
       $chapter[key] = null;
     });
 
+
     // Grid
+
     if (_.has($chapter, 'Grid')) {
       var frag = $('<ul>');
       _.each(res.Grid, function(css, key) {
         frag.append('<li>'+ key + ':' + css +'</li>');
       })
-      $output.find('#Grid').append(frag);
+      $wrapper.attr('style', formatStyle(res.Grid));
+      $output.find('#Grid').append(frag).hover(function() {
+        $wrapper.toggleClass('show-grid');
+      });
     }
+
 
     // Typography
 
     if (_.has($chapter, 'Typography')) {
+      $body.attr('style', formatStyle(res.Typography.base))
       _.each(res.Typography.output, function(item, key) {
         var frag = $('<span>'),
             group = item.group;
-        frag.html(key).attr('style', formatStyle(item));
+        frag.html(key).attr('style', formatStyle(item.style));
 
         if (group && group.length) {
           formatChapter(item, 'Typography');
-          $chapter['Typography'][group].append(frag);
+          $chapter['Typography'][group].find('.chapter-subContent').append(frag);
         } else {
           $output.find('#' + group).append(frag);
         }
@@ -91,7 +103,7 @@ require([
     }
 
 
-    $('body').append($output);
+    $wrapper.append($output);
 
   })
 
