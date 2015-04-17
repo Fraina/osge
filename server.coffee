@@ -19,12 +19,17 @@ router.get '/data', (req, res) ->
         'font-size': '16px'
         'font-family': '"Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif'
       'output':
-        'Heading 1':
+        'Heading 1 a very very very long title':
           'group': 'Heading'
           'style':
             "font-size": "180%"
             "font-weight": "800"
-        'Heading 2':
+        'Heading 2 another very very very long title':
+          'group': 'Heading'
+          'style':
+            'font-size': '150%'
+            'font-weight': '400'
+        'Heading 3 The quick brown fox jumps over the lazy dog':
           'group': 'Heading'
           'style':
             'font-size': '150%'

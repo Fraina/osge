@@ -1,9 +1,18 @@
+@import 'compass/css3'
+
 #wrapper
+  +transition(.5s)
   display: block
   margin: auto
   overflow: hidden
   padding: $b-space-l
   padding-top: 0
+  border: 1px MDcolor(blue-grey, 100) solid
+  border-top: 0
+  border-bottom: 0
+
+  &.show-grid
+    +box-shadow(0 -11px 10px rgba(black, .3))
 
 // -------------------------------------
 //   Modifiers
@@ -24,18 +33,6 @@ h2
   width: 17%
 
 // -------------------------------------
-//   Grid
-// -------------------------------------
-
-#Grid
-  .show-grid
-    border: 1px MDcolor(blue-grey, 100) solid
-    border-top: 0
-    border-bottom: 0
-
-
-
-// -------------------------------------
 //   Chapter
 // -------------------------------------
 
@@ -48,3 +45,7 @@ h2
 .chapter-subContent
   float: right
   width: 74%
+  dl:first-child
+    margin-top: 0
+  dd
+    margin-left: 0

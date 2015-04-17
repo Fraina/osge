@@ -39,7 +39,7 @@ require([
   function formatStyle(obj) {
     var ret = '';
     _.each(obj, function(value, key) {
-      ret = ret + (key + ':' + value + ';')
+      ret = ret + (key + ':' + value + '; ')
     })
     return ret;
   }
@@ -89,9 +89,13 @@ require([
     if (_.has($chapter, 'Typography')) {
       $body.attr('style', formatStyle(res.Typography.base))
       _.each(res.Typography.output, function(item, key) {
-        var frag = $('<span>'),
+        var frag = $('<dl>'),
+            styleName = $('<dt>'),
+            styleCss = $('<dd>'),
             group = item.group;
-        frag.html(key).attr('style', formatStyle(item.style));
+        styleName.html(key).attr('style', formatStyle(item.style));
+        styleCss.html(formatStyle(item.style));
+        frag.append(styleName, styleCss);
 
         if (group && group.length) {
           formatChapter(item, 'Typography');
