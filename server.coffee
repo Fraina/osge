@@ -16,6 +16,7 @@ router.get '/data', (req, res) ->
       'min-width': '880px'
 
     'ColorPalette':
+      # Main
       'VI Black':
         'group': 'Main'
         'hex': '#424242'
@@ -30,6 +31,7 @@ router.get '/data', (req, res) ->
           'r': '99'
           'g': '99'
           'b': '99'
+      # Second
       'Link':
         'group': 'Second'
         'hex': '#0288D1'
@@ -83,6 +85,7 @@ router.get '/data', (req, res) ->
         'font-size': '16px'
         'font-family': '"Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif'
       'output':
+        # Heading
         'Heading 1 a very very very long title':
           'group': 'Heading'
           'color': 'VI Black'
@@ -101,6 +104,7 @@ router.get '/data', (req, res) ->
           'style':
             'font-size': '130%'
             'font-weight': 'normal'
+        # Paragraph
         'Paragraph':
           'group': 'Paragraph'
           'color': 'VI Black'
@@ -117,6 +121,72 @@ router.get '/data', (req, res) ->
             'font-size': '110%'
             'border-left': '8px black solid'
             'padding-left': '12px'
+
+    'Buttons':
+      'base':
+        'border-radius': '5px'
+        'padding': '4px 12px'
+      'output':
+        # Submit btn
+        'Submit':
+          'group': 'Submit'
+          'bgcolor': 'VI Black'
+          'color': '#ffffff'
+          'style':
+            'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
+        'Submit :hover':
+          'group': 'Submit'
+          'bgcolor': 'Article Title'
+          'color': '#ffffff'
+          'style':
+            'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
+        'Submit :active':
+          'group': 'Submit'
+          'bgcolor': '#000000'
+          'color': '#ffffff'
+          'style':
+            'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
+        'Submit :disabled':
+          'group': 'Submit'
+          'bgcolor': 'Try'
+          'color': 'Article Title'
+          'style':
+            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
+        'Submit :test1':
+          'group': 'Submit'
+          'bgcolor': 'Outside groups'
+          'color': 'Try'
+          'style':
+            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
+        'Submit :test2':
+          'group': 'Submit'
+          'bgcolor': 'UCCU'
+          'color': 'Try'
+          'style':
+            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
+        'Submit :test3':
+          'group': 'Submit'
+          'bgcolor': 'VI Light-Blue'
+          'color': 'Try'
+          'style':
+            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
+        # Cancel btn
+        'Cancel':
+          'group': 'Cancel'
+          'bgcolor': 'Try'
+          'color': 'VI Black'
+        'Cancel :hover':
+          'group': 'Cancel'
+          'bgcolor': '#ffffff'
+          'color': 'VI Black'
+          'style':
+            'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
+        'Cancel :active':
+          'group': 'Cancel'
+          'bgcolor': 'Try'
+          'color': 'VI Black'
+          'style':
+            'box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, .3)'
 
   res.json data
   return

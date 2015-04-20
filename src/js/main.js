@@ -41,9 +41,11 @@ require([
 
   function formatStyle(obj) {
     var ret = '';
-    _.each(obj, function(value, key) {
-      ret = ret + (key + ': ' + value + '; ')
-    })
+    if (obj && obj !== undefined) {
+      _.each(obj, function(value, key) {
+        ret = ret + (key + ': ' + value + '; ')
+      })
+    }
     return ret;
   }
 
@@ -72,6 +74,16 @@ require([
     }
   }
 
+  function formatColor(property, color) {
+    if (color && color.length) {
+      if (color.match(/^(#.*)/g)) {
+        return property + ': ' + color + ';';
+      } else {
+        return property + ': ' + colorMap[color] + ';';
+      }
+    }
+  }
+
   $.get('/data').done(function(res) {
 
     _.mapObject(res, function(value, key) {
@@ -89,6 +101,7 @@ require([
       _.each(res.Grid, function(css, key) {
         frag.append('<li>'+ key + ': ' + css +'</li>');
       })
+      console.log(formatStyle(res.Grid))
       $wrapper.attr('style', formatStyle(res.Grid));
       $output.find('#Grid').append(frag).hover(function() {
         $wrapper.toggleClass('show-grid');
@@ -135,20 +148,34 @@ require([
             group = item.group || null,
             color = item.color;
 
-        function textColor(color) {
-          if (color.match(/^(#.*)/g)) {
-            return 'color: ' + color + ';';
-          } else {
-            return 'color: ' + colorMap[color] + ';';
-          }
-        }
-
-        styleName.html(key).attr('style', formatStyle(item.style) + textColor(color));
+        styleName.html(key).attr('style', formatStyle(item.style) + formatColor('color', color));
         styleCss.html(formatStyle(item.style));
         colorName.html('Color: ' + color)
         frag.append(styleName, colorName, styleCss);
 
         formatGroup(frag, item, group, 'Typography')
+      })
+    }
+
+
+    // Button
+
+    if (_.has($chapter, 'Buttons')) {
+      var baseStyle = formatStyle(res.Buttons.base);
+      _.each(res.Buttons.output, function(item, key) {
+        var frag = $('<div class="buttons">'),
+            btn = $('<span class="buttons-btns">'),
+            colorName = $('<span>').html('Color: ' + item.color),
+            bgColorName = $('<span>').html('BgColor: ' + item.bgcolor),
+            styleCss = $('<span>'),
+            group = item.group || null,
+            color = item.color,
+            bgcolor = item.bgcolor,
+            colorSetting = formatColor('color', color) + formatColor('background-color', bgcolor);
+
+        btn.html(key).attr('style', baseStyle + formatStyle(item.style) + colorSetting)
+        frag.append(btn, colorName, bgColorName)
+        formatGroup(frag, item, group, 'Buttons')
       })
     }
 
