@@ -36,10 +36,13 @@ require([
       $body = $('body'),
       $output = $(document.createDocumentFragment());
 
+  // color retrieval
+  var colorMap = {};
+
   function formatStyle(obj) {
     var ret = '';
     _.each(obj, function(value, key) {
-      ret = ret + (key + ':' + value + '; ')
+      ret = ret + (key + ': ' + value + '; ')
     })
     return ret;
   }
@@ -60,6 +63,15 @@ require([
     }
   }
 
+  function formatGroup(frag, item, group, parentChapter) {
+    if (group && group.length) {
+      formatChapter(item, parentChapter);
+      $chapter[parentChapter][group].find('.chapter-subContent').append(frag);
+    } else {
+      $output.find('#' + group).append(frag);
+    }
+  }
+
   $.get('/data').done(function(res) {
 
     _.mapObject(res, function(value, key) {
@@ -75,12 +87,39 @@ require([
     if (_.has($chapter, 'Grid')) {
       var frag = $('<ul>');
       _.each(res.Grid, function(css, key) {
-        frag.append('<li>'+ key + ':' + css +'</li>');
+        frag.append('<li>'+ key + ': ' + css +'</li>');
       })
       $wrapper.attr('style', formatStyle(res.Grid));
       $output.find('#Grid').append(frag).hover(function() {
         $wrapper.toggleClass('show-grid');
       });
+    }
+
+
+    // Color Palette
+    if (_.has($chapter, 'ColorPalette')) {
+      _.each(res.ColorPalette, function(item, key) {
+        var frag = $('<div class="ColorPalette">'),
+            color = $('<div class="ColorPalette-color">'),
+            colorName = $('<span class="ColorPalette-colorName">'),
+            colorHex = $('<span class="ColorPalette-colorHex">'),
+            colorRGB = $('<span class="ColorPalette-colorRGB">'),
+            group = item.group;
+        color.attr('style', 'background-color: '+ item.hex);
+        colorName.html(key.replace('_', ' '));
+        colorHex.html(item.hex);
+
+        var RGBret = '';
+        _.mapObject(item.rgb, function(value, key) {
+          RGBret = RGBret + '<span>' + key.toUpperCase() + ': ' + value + '</span>'
+        })
+        colorRGB.html(RGBret);
+
+        frag.append(color, colorName, colorHex, colorRGB);
+        formatGroup(frag, item, group, 'ColorPalette');
+
+        colorMap[key] = item.hex;
+      })
     }
 
 
@@ -92,17 +131,22 @@ require([
         var frag = $('<dl>'),
             styleName = $('<dt>'),
             styleCss = $('<dd>'),
-            group = item.group;
-        styleName.html(key).attr('style', formatStyle(item.style));
+            group = item.group,
+            color = item.color;
+
+        function textColor(color) {
+          if (color.match(/^(#.*)/g)) {
+            return 'color: ' + color + ';';
+          } else {
+            return 'color: ' + colorMap[color] + ';';
+          }
+        }
+
+        styleName.html(key).attr('style', formatStyle(item.style) + textColor(color));
         styleCss.html(formatStyle(item.style));
         frag.append(styleName, styleCss);
 
-        if (group && group.length) {
-          formatChapter(item, 'Typography');
-          $chapter['Typography'][group].find('.chapter-subContent').append(frag);
-        } else {
-          $output.find('#' + group).append(frag);
-        }
+        formatGroup(frag, item, group, 'Typography')
       })
     }
 

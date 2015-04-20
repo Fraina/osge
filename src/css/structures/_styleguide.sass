@@ -12,7 +12,7 @@
   border-bottom: 0
 
   &.show-grid
-    +box-shadow(0 -11px 10px rgba(black, .3))
+    +box-shadow(0 -10px 15px -5px rgba(black, .3))
 
 // -------------------------------------
 //   Modifiers
@@ -42,6 +42,9 @@ h2
   overflow: hidden
   width: 100%
 
+.chapter-content
+  margin: $b-space-l 0
+
 .chapter-subContent
   float: right
   width: 74%
@@ -49,3 +52,23 @@ h2
     margin-top: 0
   dd
     margin-left: 0
+
+// -------------------------------------
+//   ColorPalette
+// -------------------------------------
+
+.ColorPalette
+  float: left
+  width: $b-space-xl * 3.36
+  span[class^='ColorPalette']
+    display: block
+
+.ColorPalette-color
+  +border-radius(35px)
+  float: left
+  margin-right: $b-space
+  width: 70px
+  height: 70px
+
+.ColorPalette-colorRGB span
+  margin-right: $b-space-xs
