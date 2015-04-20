@@ -7,12 +7,13 @@
   overflow: hidden
   padding: $b-space-l
   padding-top: 0
-  border: 1px MDcolor(blue-grey, 100) solid
+  border: 1px MDcolor(blue-grey, 50) solid
   border-top: 0
   border-bottom: 0
 
   &.show-grid
     +box-shadow(0 -10px 15px -5px rgba(black, .3))
+    border-color: MDcolor(blue-grey, 100)
 
 // -------------------------------------
 //   Modifiers
@@ -48,10 +49,14 @@ h2
 .chapter-subContent
   float: right
   width: 74%
+  dl
+    margin-bottom: $b-space
   dl:first-child
     margin-top: 0
   dd
     margin-left: 0
+    font-size: $b-fontSize-xs
+    color: MDcolor(grey, 600)
 
 // -------------------------------------
 //   ColorPalette
@@ -60,15 +65,17 @@ h2
 .ColorPalette
   float: left
   width: $b-space-xl * 3.36
+  margin-bottom: $b-space-l
+  font-size: $b-fontSize-xs
   span[class^='ColorPalette']
     display: block
 
 .ColorPalette-color
-  +border-radius(35px)
+  +border-radius(28px)
   float: left
   margin-right: $b-space
-  width: 70px
-  height: 70px
+  width: 56px
+  height: 56px
 
 .ColorPalette-colorRGB span
   margin-right: $b-space-xs

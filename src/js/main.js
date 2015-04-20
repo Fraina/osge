@@ -131,6 +131,7 @@ require([
         var frag = $('<dl>'),
             styleName = $('<dt>'),
             styleCss = $('<dd>'),
+            colorName = $('<dd>'),
             group = item.group,
             color = item.color;
 
@@ -144,7 +145,8 @@ require([
 
         styleName.html(key).attr('style', formatStyle(item.style) + textColor(color));
         styleCss.html(formatStyle(item.style));
-        frag.append(styleName, styleCss);
+        colorName.html('Color: ' + color)
+        frag.append(styleName, colorName, styleCss);
 
         formatGroup(frag, item, group, 'Typography')
       })

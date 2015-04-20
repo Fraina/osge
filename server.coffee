@@ -15,14 +15,14 @@ router.get '/data', (req, res) ->
       'max-width': '1100px'
       'min-width': '880px'
     'ColorPalette':
-      'VI_Black':
+      'VI Black':
         'group': 'Main'
         'hex': '#424242'
         'rgb':
           'r': '99'
           'g': '99'
           'b': '99'
-      'VI_Light-Blue':
+      'VI Light-Blue':
         'group': 'Main'
         'hex': '#01579B'
         'rgb':
@@ -43,9 +43,23 @@ router.get '/data', (req, res) ->
           'r': '99'
           'g': '99'
           'b': '99'
-      'Article_Title':
+      'Article Title':
         'group': 'Second'
         'hex': '#BDBDBD'
+        'rgb':
+          'r': '99'
+          'g': '99'
+          'b': '99'
+      'Try':
+        'group': 'Second'
+        'hex': '#F5F5F5'
+        'rgb':
+          'r': '99'
+          'g': '99'
+          'b': '99'
+      'Try Again':
+        'group': 'Second'
+        'hex': '#EFEBE9'
         'rgb':
           'r': '99'
           'g': '99'
@@ -57,7 +71,7 @@ router.get '/data', (req, res) ->
       'output':
         'Heading 1 a very very very long title':
           'group': 'Heading'
-          'color': 'VI_Black'
+          'color': 'VI Black'
           'style':
             "font-size": "180%"
             "font-weight": "800"
@@ -69,13 +83,13 @@ router.get '/data', (req, res) ->
             'font-weight': '400'
         'Heading 3 The quick brown fox jumps over the lazy dog':
           'group': 'Heading'
-          'color': 'Article_Title'
+          'color': 'Article Title'
           'style':
             'font-size': '130%'
             'font-weight': 'normal'
         'Paragraph':
           'group': 'Paragraph'
-          'color': 'VI_Black'
+          'color': 'VI Black'
           'style':
             'font-size': '100%'
         'Link':
