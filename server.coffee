@@ -14,6 +14,7 @@ router.get '/data', (req, res) ->
     'Grid':
       'max-width': '1100px'
       'min-width': '880px'
+
     'ColorPalette':
       'VI Black':
         'group': 'Main'
@@ -57,13 +58,26 @@ router.get '/data', (req, res) ->
           'r': '99'
           'g': '99'
           'b': '99'
-      'Try Again':
+      'UCCU':
         'group': 'Second'
-        'hex': '#EFEBE9'
+        'hex': '#FB8C00'
         'rgb':
           'r': '99'
           'g': '99'
           'b': '99'
+      'Outside groups':
+        'hex': '#AD1457'
+        'rgb':
+          'r': '99'
+          'g': '99'
+          'b': '99'
+      'I do not have any friend':
+        'hex': 'black'
+        'rgb':
+          'r': '00'
+          'g': '00'
+          'b': '00'
+
     'Typography':
       'base':
         'font-size': '16px'
@@ -97,6 +111,12 @@ router.get '/data', (req, res) ->
           'color': 'Link'
           'style':
             'font-size': '100%'
+        'I do not have any friend either':
+          'color': 'I do not have any friend'
+          'style':
+            'font-size': '110%'
+            'border-left': '8px black solid'
+            'padding-left': '12px'
 
   res.json data
   return

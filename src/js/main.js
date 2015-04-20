@@ -68,7 +68,7 @@ require([
       formatChapter(item, parentChapter);
       $chapter[parentChapter][group].find('.chapter-subContent').append(frag);
     } else {
-      $output.find('#' + group).append(frag);
+      $output.find('#' + parentChapter).append(frag);
     }
   }
 
@@ -104,7 +104,7 @@ require([
             colorName = $('<span class="ColorPalette-colorName">'),
             colorHex = $('<span class="ColorPalette-colorHex">'),
             colorRGB = $('<span class="ColorPalette-colorRGB">'),
-            group = item.group;
+            group = item.group || null;
         color.attr('style', 'background-color: '+ item.hex);
         colorName.html(key.replace('_', ' '));
         colorHex.html(item.hex);
@@ -132,7 +132,7 @@ require([
             styleName = $('<dt>'),
             styleCss = $('<dd>'),
             colorName = $('<dd>'),
-            group = item.group,
+            group = item.group || null,
             color = item.color;
 
         function textColor(color) {
