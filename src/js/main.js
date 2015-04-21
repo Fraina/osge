@@ -105,7 +105,6 @@ require([
       _.each(res.Grid, function(css, key) {
         frag.append('<li>'+ key + ': ' + css +'</li>');
       })
-      console.log(formatStyle(res.Grid))
       $wrapper.attr('style', formatStyle(res.Grid));
       $output.find('#Grid').append(frag).hover(function() {
         $wrapper.toggleClass('show-grid');
@@ -141,7 +140,6 @@ require([
 
 
     // Typography
-
     if (_.has($chapter, 'Typography')) {
       $body.attr('style', formatStyle(res.Typography.base))
       _.each(res.Typography.output, function(item, key) {
@@ -163,7 +161,6 @@ require([
 
 
     // Button
-
     if (_.has($chapter, 'Buttons')) {
       var baseStyle = formatStyle(res.Buttons.base);
       _.each(res.Buttons.output, function(item, key) {
@@ -184,6 +181,28 @@ require([
         btn.html(key).attr('style', baseStyle + formatStyle(style) + colorSetting)
         frag.append(btn, colorName, bgColorName, styleCss)
         formatGroup(frag, item, group, 'Buttons')
+      })
+    }
+
+    // Space
+    if (_.has($chapter, 'Space')) {
+      var baseSpace = res.Space.base;
+      _.each(res.Space.output, function(item, key) {
+        var frag = $('<div class="space">'),
+            spaceRange = $('<div class="space-range">').append('<span class="space-marking">'),
+            spaceName = $('<span class="space-name">').html(key),
+            spacePX = $('<span class="space-px">'),
+            group = item.group;
+
+        if (! item.odds.match(/px/g)) {
+          spaceRange.css('width', baseSpace * item.odds - 2 + 'px');
+          spacePX.html('x' + item.odds + ' (' + baseSpace * item.odds + 'px)');
+        } else {
+          spaceRange.css('width', item.odds);
+          spacePX.html(item.odds);
+        }
+        frag.append(spaceRange, spacePX, spaceName);
+        formatGroup(frag, item, group, 'Space');
       })
     }
 

@@ -140,7 +140,7 @@ router.get '/data', (req, res) ->
           'color': '#ffffff'
           'style':
             'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
-            'text-shadow': '0 -1px 1px rgba(0, 0, 0, .5)'
+            'text-shadow': '0 -1px 1px rgba(0, 0, 0, .2)'
         'Submit :active':
           'group': 'Submit'
           'bgcolor': '#000000'
@@ -151,24 +151,6 @@ router.get '/data', (req, res) ->
           'group': 'Submit'
           'bgcolor': 'Try'
           'color': 'Article Title'
-          'style':
-            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
-        'Submit :test1':
-          'group': 'Submit'
-          'bgcolor': 'Outside groups'
-          'color': 'Try'
-          'style':
-            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
-        'Submit :test2':
-          'group': 'Submit'
-          'bgcolor': 'UCCU'
-          'color': 'Try'
-          'style':
-            'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
-        'Submit :test3':
-          'group': 'Submit'
-          'bgcolor': 'VI Light-Blue'
-          'color': 'Try'
           'style':
             'box-shadow': '0 -1px 2px rgba(0, 0, 0, .2)'
         # Cancel btn
@@ -188,6 +170,39 @@ router.get '/data', (req, res) ->
           'color': 'VI Black'
           'style':
             'box-shadow': 'inset 0 1px 2px rgba(0, 0, 0, .3)'
+
+    'Space':
+      'base': '18'
+      'output':
+        'b-space-xs':
+          'group': 'MVCSS'
+          'odds': '0.25'
+        'b-space-s':
+          'group': 'MVCSS'
+          'odds': '0.5'
+        'b-space':
+          'group': 'MVCSS'
+          'odds': '1'
+        'b-space-l':
+          'group': 'MVCSS'
+          'odds': '2'
+        'b-space-xl':
+          'group': 'MVCSS'
+          'odds': '4'
+        'TestRange':
+          'group': 'Test'
+          'odds': '180px'
+        'Bad guy':
+          'odds': '275px'
+        'Does not help':
+          'odds': '500px'
+
+    'Test':
+      'have group':
+        'group': 'Pic'
+        'imgSrc': 'img/test.png'
+      'does not':
+        'imgSrc': 'img/test.png'
 
   res.json data
   return
