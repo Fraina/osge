@@ -39,11 +39,15 @@ require([
   // color retrieval
   var colorMap = {};
 
-  function formatStyle(obj) {
+  function formatStyle(obj, option) {
     var ret = '';
     if (obj && obj !== undefined) {
       _.each(obj, function(value, key) {
-        ret = ret + (key + ': ' + value + '; ')
+        if (option) {
+          ret = ret + (key + ': ' + value + '; ') + '<br >'
+        } else {
+          ret = ret + (key + ': ' + value + '; ')
+        }
       })
     }
     return ret;
@@ -150,7 +154,7 @@ require([
 
         styleName.html(key).attr('style', formatStyle(item.style) + formatColor('color', color));
         styleCss.html(formatStyle(item.style));
-        colorName.html('Color: ' + color)
+        colorName.html('Color: ' + color);
         frag.append(styleName, colorName, styleCss);
 
         formatGroup(frag, item, group, 'Typography')
@@ -170,11 +174,15 @@ require([
             styleCss = $('<span>'),
             group = item.group || null,
             color = item.color,
+            style = item.style,
             bgcolor = item.bgcolor,
             colorSetting = formatColor('color', color) + formatColor('background-color', bgcolor);
 
-        btn.html(key).attr('style', baseStyle + formatStyle(item.style) + colorSetting)
-        frag.append(btn, colorName, bgColorName)
+        if (style) {
+          styleCss.html('Style <br >' + formatStyle(style, 1))
+        }
+        btn.html(key).attr('style', baseStyle + formatStyle(style) + colorSetting)
+        frag.append(btn, colorName, bgColorName, styleCss)
         formatGroup(frag, item, group, 'Buttons')
       })
     }

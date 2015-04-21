@@ -140,6 +140,7 @@ router.get '/data', (req, res) ->
           'color': '#ffffff'
           'style':
             'box-shadow': '0 1px 2px rgba(0, 0, 0, .3)'
+            'text-shadow': '0 -1px 1px rgba(0, 0, 0, .5)'
         'Submit :active':
           'group': 'Submit'
           'bgcolor': '#000000'
