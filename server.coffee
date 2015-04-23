@@ -224,7 +224,7 @@ router.get '/data', (req, res) ->
           'className': 'icon-control'
           'content': '\e604'
 
-    'Test':
+    'Others':
       'have group':
         'group': 'Pic'
         'imgSrc': 'img/test.png'
