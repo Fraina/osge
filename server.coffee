@@ -197,6 +197,33 @@ router.get '/data', (req, res) ->
         'Does not help':
           'odds': '500px'
 
+    'Icon':
+      'cssUrl': 'font/icomoon.css'
+      'output':
+        'Search':
+          'group': 'Main'
+          'className': 'icon-search'
+          'content': '\e600'
+        'User':
+          'group': 'Main'
+          'className': 'icon-user'
+          'content': '\e603'
+        'Menu':
+          'group': 'Nav'
+          'className': 'icon-menu'
+          'content': '\e602'
+        'Cube':
+          'group': 'Nav'
+          'className': 'icon-cube'
+          'content': '\e601'
+        'Control':
+          'group': 'Nav'
+          'className': 'icon-control'
+          'content': '\e604'
+        'Control-Nogroup':
+          'className': 'icon-control'
+          'content': '\e604'
+
     'Test':
       'have group':
         'group': 'Pic'

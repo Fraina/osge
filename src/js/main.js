@@ -206,6 +206,21 @@ require([
       })
     }
 
+    // Icon
+    if (_.has($chapter, 'Icon')) {
+      $('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', res.Icon.cssUrl))
+      _.each(res.Icon.output, function(item, key) {
+        var frag = $('<div class="icons">'),
+            icon = $('<i>').addClass(item.className),
+            iconName = $('<span class="icons-name">').html(key),
+            iconClass = $('<span class="icons-class">').html('.' + item.className),
+            iconContent = $('<span class="icons-content">').html('content: ' + item.content),
+            group = item.group;
+
+        frag.append(icon, iconName, iconClass, iconContent)
+        formatGroup(frag, item, group, 'Icon')
+      })
+    }
 
     $wrapper.append($output);
 
