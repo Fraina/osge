@@ -24,9 +24,8 @@ requirejs.config({
 
 require([
   'jquery',
-  'underscore',
-  'backbone'
-], function ($, _, Backbone) {
+  'underscore'
+], function ($, _) {
 
   'use strict';
 
@@ -69,6 +68,10 @@ require([
     }
   }
 
+  function formatChapterName(chapterName) {
+    return chapterName.replace(/_/, ' ');
+  }
+
   function formatGroup(frag, item, group, parentChapter) {
     if (group && group.length) {
       formatChapter(item, parentChapter);
@@ -92,7 +95,7 @@ require([
 
     _.mapObject(res, function(value, mapKey) {
       var frag = $('<div>');
-      frag.attr('id', mapKey).addClass('chapter').prepend('<h1>' + mapKey + '</h1>');
+      frag.attr('id', mapKey).addClass('chapter').prepend('<h1>' + formatChapterName(mapKey) + '</h1>');
       $output.append(frag)
       $chapter[mapKey] = null;
 
@@ -110,28 +113,24 @@ require([
           break;
 
 
-        case 'ColorPalette':
+        case 'Color_Palette':
           _.each(value, function(item, key) {
             var frag = $('<div class="ColorPalette">'),
-                color = $('<div class="ColorPalette-color">'),
-                colorName = $('<span class="ColorPalette-colorName">'),
-                colorHex = $('<span class="ColorPalette-colorHex">'),
+                color = $('<div class="ColorPalette-color">').attr('style', 'background-color: '+ item.hex),
+                colorName = $('<span class="ColorPalette-colorName">').html(formatChapterName(key)),
+                colorHex = $('<span class="ColorPalette-colorHex">').html(item.hex),
                 colorRGB = $('<span class="ColorPalette-colorRGB">'),
-                group = item.group || null;
-            color.attr('style', 'background-color: '+ item.hex);
-            colorName.html(key.replace('_', ' '));
-            colorHex.html(item.hex);
+                group = item.group;
 
             var RGBret = '';
             _.mapObject(item.rgb, function(value, key) {
               RGBret = RGBret + '<span>' + key.toUpperCase() + ': ' + value + '</span>'
             })
             colorRGB.html(RGBret);
+            colorMap[key] = item.hex;
 
             frag.append(color, colorName, colorHex, colorRGB);
             formatGroup(frag, item, group, mapKey);
-
-            colorMap[key] = item.hex;
           })
           break;
 
@@ -140,17 +139,13 @@ require([
           $body.attr('style', formatStyle(res.Typography.base))
           _.each(value.output, function(item, key) {
             var frag = $('<dl>'),
-                styleName = $('<dt>'),
-                styleCss = $('<dd>'),
-                colorName = $('<dd>'),
-                group = item.group || null,
+                styleName = $('<dt>').html(formatChapterName(key)).attr('style', formatStyle(item.style) + formatColor('color', color)),
+                styleCss = $('<dd>').html(formatStyle(item.style)),
+                colorName = $('<dd>').html('Color: ' + color),
+                group = item.group,
                 color = item.color;
 
-            styleName.html(key).attr('style', formatStyle(item.style) + formatColor('color', color));
-            styleCss.html(formatStyle(item.style));
-            colorName.html('Color: ' + color);
             frag.append(styleName, colorName, styleCss);
-
             formatGroup(frag, item, group, mapKey)
           })
           break;
@@ -160,20 +155,20 @@ require([
           var baseStyle = formatStyle(res.Buttons.base);
           _.each(value.output, function(item, key) {
             var frag = $('<div class="buttons">'),
-                btn = $('<span class="buttons-btns">'),
                 colorName = $('<span>').html('Color: ' + item.color),
                 bgColorName = $('<span>').html('BgColor: ' + item.bgcolor),
                 styleCss = $('<span>'),
-                group = item.group || null,
+                group = item.group,
                 color = item.color,
                 style = item.style,
                 bgcolor = item.bgcolor,
-                colorSetting = formatColor('color', color) + formatColor('background-color', bgcolor);
+                colorSetting = formatColor('color', color) + formatColor('background-color', bgcolor),
+                btn = $('<span class="buttons-btns">').html(key).attr('style', baseStyle + formatStyle(style) + colorSetting);
 
             if (style) {
               styleCss.html('Style <br >' + formatStyle(style, 1))
             }
-            btn.html(key).attr('style', baseStyle + formatStyle(style) + colorSetting)
+
             frag.append(btn, colorName, bgColorName, styleCss)
             formatGroup(frag, item, group, mapKey)
           })
@@ -196,6 +191,7 @@ require([
               spaceRange.css('width', item.odds);
               spacePX.html(item.odds);
             }
+
             frag.append(spaceRange, spacePX, spaceName);
             formatGroup(frag, item, group, mapKey);
           })
@@ -209,8 +205,12 @@ require([
                 icon = $('<i>').addClass(item.className),
                 iconName = $('<span class="icons-name">').html(key),
                 iconClass = $('<span class="icons-class">').html('.' + item.className),
-                iconContent = $('<span class="icons-content">').html('content: ＼' + item.content),
+                iconContent = $('<span class="icons-content">'),
                 group = item.group;
+
+            if (item.content) {
+              iconContent.html('content: \\' + item.content)
+            }
 
             frag.append(icon, iconName, iconClass, iconContent)
             formatGroup(frag, item, group, mapKey)
@@ -223,7 +223,6 @@ require([
                 img = $('<img>').attr('src', item.imgSrc),
                 group = item.group;
 
-            console.log(img)
             frag.append(img);
             formatGroup(frag, item, group, mapKey);
           })
@@ -234,5 +233,4 @@ require([
 
   })
 
-  Backbone.history.start();
 });

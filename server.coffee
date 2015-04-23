@@ -15,7 +15,7 @@ router.get '/data', (req, res) ->
       'max-width': '1100px'
       'min-width': '880px'
 
-    'ColorPalette':
+    'Color_Palette':
       # Main
       'VI Black':
         'group': 'Main'
@@ -222,9 +222,11 @@ router.get '/data', (req, res) ->
           'content': '\e604'
         'Control-Nogroup':
           'className': 'icon-control'
-          'content': '\e604'
+        '<- not an icon font':
+          'className': 'icon-cube'
+          'content': '\e601'
 
-    'Others':
+    'Something_Else':
       'have group':
         'group': 'Pic'
         'imgSrc': 'img/test.png'
