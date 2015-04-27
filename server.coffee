@@ -20,65 +20,32 @@ router.get '/data', (req, res) ->
       'VI Black':
         'group': 'Main'
         'hex': '#424242'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'VI Light-Blue':
         'group': 'Main'
         'hex': '#01579B'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       # Second
       'Link':
         'group': 'Second'
         'hex': '#0288D1'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'Highlight':
         'group': 'Second'
         'hex': '#FFEE58'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'Article Title':
         'group': 'Second'
         'hex': '#BDBDBD'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'Try':
         'group': 'Second'
         'hex': '#F5F5F5'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'UCCU':
         'group': 'Second'
         'hex': '#FB8C00'
-        'rgb':
-          'r': '99'
-          'g': '99'
-          'b': '99'
       'Outside groups':
         'hex': '#AD1457'
+      'I do not have any friend':
         'rgb':
           'r': '99'
           'g': '99'
           'b': '99'
-      'I do not have any friend':
-        'hex': 'black'
-        'rgb':
-          'r': '00'
-          'g': '00'
-          'b': '00'
 
     'Typography':
       'base':

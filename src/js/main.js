@@ -7,7 +7,8 @@ requirejs.config({
     backbone: '../bower/backbone/backbone',
     i18n: '../bower/requirejs-i18n/i18n',
     text: '../bower/requirejs-text/text',
-    mock: '../bower/mockjs/dist/mock'
+    mock: '../bower/mockjs/dist/mock',
+    hexRgb: 'vendor/hex-rgb'
   },
 
   shim: {
@@ -24,8 +25,9 @@ requirejs.config({
 
 require([
   'jquery',
-  'underscore'
-], function ($, _) {
+  'underscore',
+  'hexRgb'
+], function ($, _, HexRgb) {
 
   'use strict';
 
@@ -91,6 +93,54 @@ require([
     }
   }
 
+  function formatHexAndRGB(item) {
+    var ret = {},
+        keys = _.keys(item),
+        caseType;
+
+      if (_.indexOf(keys, 'rgb') != -1 && _.indexOf(keys, 'hex') != -1) {
+        caseType = 1;
+      } else if (_.indexOf(keys, 'rgb') == -1 && _.indexOf(keys, 'hex') != -1) {
+        caseType = 2;
+      } else if (_.indexOf(keys, 'rgb') != -1 && _.indexOf(keys, 'hex') == -1) {
+        caseType = 3;
+      }
+
+      switch(caseType) {
+      case 1:
+        // have both.
+        ret = {
+          'hex': item.hex,
+          'rgb': item.rgb
+        }
+        break;
+      case 2:
+        // have hex but rgb
+        var rgb = toRGB(item.hex.slice(1))
+        ret = {
+          'hex': item.hex,
+          'rgb': {
+            'r': rgb[0],
+            'g': rgb[1],
+            'b': rgb[2]
+          }
+        }
+        break;
+      case 3:
+        // have rgb but hex
+        var hex = '#' + toHex(item.rgb.r, item.rgb.g, item.rgb.b)
+        ret = {
+          'hex': hex,
+          'rgb': item.rgb
+        }
+        break;
+      default:
+        throw new Error('Color Palette: require Hex or RGB')
+    }
+
+    return ret;
+  }
+
   $.get('/data').done(function(res) {
 
     _.mapObject(res, function(value, mapKey) {
@@ -116,18 +166,20 @@ require([
         case 'Color_Palette':
           _.each(value, function(item, key) {
             var frag = $('<div class="ColorPalette">'),
-                color = $('<div class="ColorPalette-color">').attr('style', 'background-color: '+ item.hex),
+                color = $('<div class="ColorPalette-color">'),
                 colorName = $('<span class="ColorPalette-colorName">').html(formatChapterName(key)),
-                colorHex = $('<span class="ColorPalette-colorHex">').html(item.hex),
+                colorHex = $('<span class="ColorPalette-colorHex">'),
                 colorRGB = $('<span class="ColorPalette-colorRGB">'),
                 group = item.group;
 
+            color.attr('style', 'background-color: '+ formatHexAndRGB(item).hex)
+            colorHex.html(formatHexAndRGB(item).hex)
             var RGBret = '';
-            _.mapObject(item.rgb, function(value, key) {
+            _.mapObject(formatHexAndRGB(item).rgb, function(value, key) {
               RGBret = RGBret + '<span>' + key.toUpperCase() + ': ' + value + '</span>'
             })
             colorRGB.html(RGBret);
-            colorMap[key] = item.hex;
+            colorMap[key] = formatHexAndRGB(item).hex;
 
             frag.append(color, colorName, colorHex, colorRGB);
             formatGroup(frag, item, group, mapKey);
@@ -139,11 +191,11 @@ require([
           $body.attr('style', formatStyle(res.Typography.base))
           _.each(value.output, function(item, key) {
             var frag = $('<dl>'),
+                group = item.group,
+                color = item.color,
                 styleName = $('<dt>').html(formatChapterName(key)).attr('style', formatStyle(item.style) + formatColor('color', color)),
                 styleCss = $('<dd>').html(formatStyle(item.style)),
-                colorName = $('<dd>').html('Color: ' + color),
-                group = item.group,
-                color = item.color;
+                colorName = $('<dd>').html('Color: ' + color);
 
             frag.append(styleName, colorName, styleCss);
             formatGroup(frag, item, group, mapKey)
