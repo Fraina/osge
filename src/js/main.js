@@ -8,7 +8,8 @@ requirejs.config({
     i18n: '../bower/requirejs-i18n/i18n',
     text: '../bower/requirejs-text/text',
     mock: '../bower/mockjs/dist/mock',
-    hexRgb: 'vendor/hex-rgb'
+    hexRgb: 'vendor/hex-rgb',
+    format: 'vendor/jquery.format'
   },
 
   shim: {
@@ -26,7 +27,8 @@ requirejs.config({
 require([
   'jquery',
   'underscore',
-  'hexRgb'
+  'hexRgb',
+  'format'
 ], function ($, _, HexRgb) {
 
   'use strict';
@@ -141,8 +143,12 @@ require([
     return ret;
   }
 
-  $.get('/data').done(function(res) {
 
+
+
+
+
+  function parser(res) {
     _.mapObject(res, function(value, mapKey) {
       var frag = $('<div>');
       frag.attr('id', mapKey).addClass('chapter').prepend('<h1>' + formatChapterName(mapKey) + '</h1>');
@@ -283,6 +289,56 @@ require([
 
     $wrapper.append($output);
 
+  }
+
+
+  // when start with mock server
+  $.get('/data').done(function(res) {
+    parser(res);
+  })
+
+
+// -------------------------------------
+// JSON editor
+// -------------------------------------
+
+  var $io = $('#io'),
+      $io_toggleBtn = $io.find('.io-toggleBtn'),
+      $io_toggleBtnIcon = $io_toggleBtn.find('.nav-icon'),
+      $io_example = $io.find('.io-example'),
+      $io_submit = $io.find('.io-submit'),
+      $io_textarea = $io.find('textarea');
+
+  $io_toggleBtn.click(function() {
+    $io_toggleBtnIcon.toggleClass('is-open')
+    $io.toggleClass('is-show')
+  })
+
+  $io_example.click(function() {
+    $.get('js/example.json').done(function(res) {
+      $io_textarea.text(JSON.stringify(res)).format({method: 'json'});
+    })
+  })
+
+  $io_submit.click(function() {
+    var data = null;
+    try {
+      data = JSON.parse($io_textarea.val())
+    } catch (e if e instanceof SyntaxError) {
+      $('.io-status').html('Oops, parse failed!')
+                     .addClass("is-show")
+                     .delay(4500)
+                     .queue(function() {
+                         $(this).removeClass("is-show");
+                         $(this).dequeue();
+                     });
+    } finally {
+      if (data != null) {
+        $wrapper.empty();
+        parser(JSON.parse($io_textarea.val()));
+        $io_toggleBtn.trigger('click');
+      }
+    }
   })
 
 });

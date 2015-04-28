@@ -1,0 +1,207 @@
+{
+  "Grid": {
+    "max-width": "1100px",
+    "min-width": "880px"
+  },
+
+  "Color_Palette": {
+    "Main color 1": {
+      "group": "Main",
+      "hex": "#424242"
+    },
+    "Main color 2": {
+      "group": "Main",
+      "hex": "#01579B"
+    },
+    "Second color 1": {
+      "group": "Second",
+      "hex": "#0288D1"
+    },
+    "Second color 1": {
+      "group": "Second",
+      "hex": "#FFEE58"
+    },
+    "Second color 1": {
+      "group": "Second",
+      "hex": "#BDBDBD"
+    },
+    "Outside groups": {
+      "hex": "#AD1457"
+    }
+  },
+
+  "Typography": {
+    "base": {
+      "font-size": "16px",
+      "font-family": "'Segoe UI', 'Lucida Grande', Helvetica, Arial, 'Microsoft YaHei', FreeSans, Arimo, 'Droid Sans','wenquanyi micro hei', 'Hiragino Sans GB', 'Hiragino Sans GB W3', Arial, sans-serif"
+    },
+    "output": {
+      "Heading 1": {
+        "group": "Heading",
+        "color": "Main color 1",
+        "style": {
+          "font-size": "180%",
+          "font-weight": "800"
+        }
+      },
+      "Heading 2": {
+        "group": "Heading",
+        "color": "#000000",
+        "style": {
+          "font-size": "150%",
+          "font-weight": "400"
+        }
+      },
+      "Heading 3": {
+        "group": "Heading",
+        "color": "Main color 2",
+        "style": {
+          "font-size": "130%",
+          "font-weight": "normal"
+        }
+      },
+      "Paragraph": {
+        "group": "Paragraph",
+        "color": "Second color 1",
+        "style": {
+          "font-size": "100%"
+        }
+      },
+      "Link": {
+        "group": "Paragraph",
+        "color": "Second color 2",
+        "style": {
+          "font-size": "100%"
+        }
+      },
+      "Outside groups": {
+        "color": "Outside groups",
+        "style": {
+          "font-size": "110%",
+          "border-left": "8px black solid",
+          "padding-left": "12px"
+        }
+      }
+    }
+  },
+
+  "Buttons": {
+    "base": {
+      "border-radius": "5px",
+      "padding": "4px 12px"
+    },
+    "output": {
+      "Submit": {
+        "group": "Submit",
+        "bgcolor": "Main color 1",
+        "color": "#ffffff",
+        "style": {
+          "box-shadow": "0 1px 2px rgba(0, 0, 0, .3)"
+        }
+      },
+      "Submit :hover": {
+        "group": "Submit",
+        "bgcolor": "Main color 2",
+        "color": "#ffffff",
+        "style": {
+          "box-shadow": "0 1px 2px rgba(0, 0, 0, .3)",
+          "text-shadow": "0 -1px 1px rgba(0, 0, 0, .2)"
+        }
+      },
+      "Submit :active": {
+        "group": "Submit",
+        "bgcolor": "#000000",
+        "color": "#ffffff",
+        "style": {
+          "box-shadow": "0 1px 2px rgba(0, 0, 0, .3)"
+        }
+      },
+      "Submit :disabled": {
+        "group": "Submit",
+        "bgcolor": "Second color 1",
+        "color": "Main color 1",
+        "style": {
+          "box-shadow": "0 -1px 2px rgba(0, 0, 0, .2)"
+        }
+      }
+    }
+  },
+
+  "Space": {
+    "base": "18",
+    "output": {
+      "b-space-xs": {
+        "group": "MVCSS",
+        "odds": "0.25"
+      },
+      "b-space-s": {
+        "group": "MVCSS",
+        "odds": "0.5"
+      },
+      "b-space": {
+        "group": "MVCSS",
+        "odds": "1"
+      },
+      "b-space-l": {
+        "group": "MVCSS",
+        "odds": "2"
+      },
+      "b-space-xl": {
+        "group": "MVCSS",
+        "odds": "4"
+      },
+      "TestRange": {
+        "group": "Test",
+        "odds": "180px"
+      },
+      "Outside groups": {
+        "odds": "275px"
+      }
+    }
+  },
+
+  "Icon": {
+    "cssUrl": "font/icomoon.css",
+    "output": {
+      "Search": {
+        "group": "Main",
+        "className": "icon-search",
+        "content": "e600"
+      },
+      "User": {
+        "group": "Main",
+        "className": "icon-user",
+        "content": "e603"
+      },
+      "Menu": {
+        "group": "Nav",
+        "className": "icon-menu",
+        "content": "e602"
+      },
+      "Cube": {
+        "group": "Nav",
+        "className": "icon-cube",
+        "content": "e601"
+      },
+      "Control": {
+        "group": "Nav",
+        "className": "icon-control",
+        "content": "e604"
+      },
+      "Outside groups": {
+        "className": "icon-control"
+      }
+    }
+  },
+
+  "Something_Else": {
+    "Inside groups": {
+      "group": "Pic",
+      "imgSrc": "img/test.png"
+    },
+    "Outside groups": {
+      "imgSrc": "img/test.png"
+    }
+  }
+
+}
