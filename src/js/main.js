@@ -324,18 +324,21 @@ require([
     var data = null;
     try {
       data = JSON.parse($io_textarea.val())
-    } catch (e if e instanceof SyntaxError) {
-      $('.io-status').html('Oops, parse failed!')
-                     .addClass("is-show")
-                     .delay(4500)
-                     .queue(function() {
-                         $(this).removeClass("is-show");
-                         $(this).dequeue();
-                     });
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        $('.io-status').html('Oops, parse failed!')
+                       .addClass("is-show")
+                       .delay(4500)
+                       .queue(function() {
+                           $(this).removeClass("is-show");
+                           $(this).dequeue();
+                       });
+      }
     } finally {
       if (data != null) {
         $wrapper.empty();
-        parser(JSON.parse($io_textarea.val()));
+        parser(data);
+        $io_textarea.format({method: 'json'});
         $io_toggleBtn.trigger('click');
       }
     }
