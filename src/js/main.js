@@ -3,33 +3,23 @@ requirejs.config({
 
   paths: {
     jquery: '../bower/jquery/dist/jquery.min',
-    underscore: '../bower/underscore/underscore-min',
-    backbone: '../bower/backbone/backbone',
-    i18n: '../bower/requirejs-i18n/i18n',
-    text: '../bower/requirejs-text/text',
-    mock: '../bower/mockjs/dist/mock',
-    hexRgb: 'vendor/hex-rgb',
-    format: 'vendor/jquery.format'
+    underscore: '../bower/underscore/underscore-min'
   },
 
   shim: {
     underscore: {
       exports: '_'
-    },
-
-    backbone: {
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
     }
+
   }
 });
 
 require([
   'jquery',
   'underscore',
-  'hexRgb',
-  'format'
-], function ($, _, HexRgb) {
+  'vendor/hex-rgb',
+  'vendor/jquery.format'
+], function ($, _) {
 
   'use strict';
 
