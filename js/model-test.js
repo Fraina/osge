@@ -1,0 +1,1 @@
+define(function(e){"use strict";var n=e("backbone"),t={};return t.Sample=n.Model.extend({urlRoot:"/api/samples"}),t});

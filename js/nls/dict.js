@@ -1,0 +1,1 @@
+define({root:{welcome:"Welcome!"},"zh-cn":!0,"zh-tw":!0});
