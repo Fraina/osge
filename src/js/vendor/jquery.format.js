@@ -14,7 +14,12 @@
 *   http://www.gnu.org/licenses/gpl.html
 *
 */
-(function( $ ) {
+
+(function(factory){
+  if (typeof define === 'function' && define.amd) {
+      define(['jquery'], factory);
+  }
+})(function($){
 
   /**
    * utility function called from constructor of Formatter
@@ -362,4 +367,4 @@
   };
 
 
-})(jQuery);
+});
